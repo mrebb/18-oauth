@@ -13,6 +13,7 @@ import oauth from './lib/oauth.js';
 
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
+  console.log(req.body);
   user.save()
     .then( user => res.send(user.generateToken()) )
     .catch(next);
