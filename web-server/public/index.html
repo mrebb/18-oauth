@@ -19,7 +19,7 @@
                 </label>
 
                 <label>
-                    Email: <input name="email" type="email" required />
+                    FullName: <input name="full_name" type="full_name" required />
                 </label>
 
                 <label>
@@ -117,13 +117,13 @@
 
         <script>
 
-          let googleURL = "https://accounts.google.com/o/oauth2/v2/auth";
+          let instagramURL = "https://api.instagram.com/oauth/authorize/";
 
           let options = {
-            client_id:'560654039720-5kmgrmq63ctu07hb8e973t589jio17qf.apps.googleusercontent.com',
+            client_id:'f6fe9347cc7b4e51a141127857b8ca42',
             redirect_uri: 'http://localhost:3000/oauth',
-            scope: 'email openid profile',
-            prompt: 'consent',
+            // scope: 'full_name openid profile',
+            // prompt: 'consent',
             response_type: 'code'
           }
 
@@ -131,9 +131,9 @@
             return `${key}=` + encodeURIComponent(options[key]);
           }).join("&");
 
-          let authURL = `${googleURL}?${QueryString}`;
+          let authURL = `${instagramURL}?${QueryString}`;
 
-          $('#oauth').append(`<a href="${authURL}">Login With Google</a>`);
+          $('#oauth').append(`<a href="${authURL}">Login With Instagram</a>`);
 
         </script>
 

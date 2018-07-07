@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 const userSchema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  email: {type: String, required: true},
+  full_name: {type: String, required: true},
 });
 
 // Before we save, hash the plain text password
@@ -39,11 +39,11 @@ userSchema.statics.createFromOAuth = function(incoming) {
     }
    */
 
-  if ( ! incoming || ! incoming.email ) {
-    return Promise.reject('VALIDATION ERROR: missing username/email or password ');
+  if ( ! incoming || ! incoming.username ) {
+    return Promise.reject('VALIDATION ERROR: missing username or password ');
   }
 
-  return this.findOne({email:incoming.email})
+  return this.findOne({username:incoming.username})
     .then(user => {
       if ( ! user ) { throw new Error ('User Not Found'); }
       console.log('Welcome Back', user.username);
@@ -51,12 +51,12 @@ userSchema.statics.createFromOAuth = function(incoming) {
     })
     .catch( error => {
     // Create the user
-      let username = incoming.email;
+      let username = incoming.username;
       let password = 'none';
       return this.create({
         username: username,
         password: password,
-        email: incoming.email,
+        full_name:incoming.full_name,
       });
     });
 
