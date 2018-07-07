@@ -19,7 +19,7 @@ describe('Authentication Server', () => {
   // Note that these will actually be using the mocked models
   // from the mock version of require-dir.  IOW .. no need to spin up
   // a mongo server to run these tests. (we don't want to test mongo anyway!)
-
+  
   it('gets a 401 on a bad login', () => {
     return superagent.get('http://localhost:8888/signin')
       .then(response => {
